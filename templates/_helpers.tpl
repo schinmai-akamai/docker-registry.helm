@@ -123,9 +123,9 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
   value: {{ .Values.s3.multipartcopythresholdsize | quote }}
 {{- end -}}
 
-{{- if .Values.redirect }}
-- name: REGISTRY_STORAGE_REDIRECT
-  value: {{ .Values.redirect | quote }}
+{{- if .Values.redirect.disable }}
+- name: REGISTRY_STORAGE_REDIRECT_DISABLE
+  value: {{ .Values.redirect.disable | quote }}
 {{- end -}}
 
 {{- else if eq .Values.storage "swift" }}
