@@ -107,9 +107,6 @@ secrets:
 #  multipartcopymaxconcurrency: 100
 #  multipartcopythresholdsize: 33554432
 
-# redirect:
-#  disable: false 
-
 # Options for swift storage type:
 # swift:
 #  authurl: http://swift.example.com/
