@@ -103,6 +103,31 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
   value: {{ .Values.s3.secure | quote }}
 {{- end -}}
 
+{{- if .Values.s3.chunksize }}
+- name: REGISTRY_STORAGE_S3_CHUNKSIZE
+  value: {{ .Values.s3.chunksize | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopychunksize }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYCHUNKSIZE
+  value: {{ .Values.s3.multipartcopychunksize | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopymaxconcurrency }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYMAXCONCURRENCY
+  value: {{ .Values.s3.multipartcopymaxconcurrency | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopythresholdsize }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYTHRESHOLDSIZE
+  value: {{ .Values.s3.multipartcopythresholdsize | quote }}
+{{- end -}}
+
+{{- if .Values.redirect }}
+- name: REGISTRY_STORAGE_REDIRECT
+  value: {{ .Values.redirect | quote }}
+{{- end -}}
+
 {{- else if eq .Values.storage "swift" }}
 - name: REGISTRY_STORAGE_SWIFT_AUTHURL
   value: {{ required ".Values.swift.authurl is required" .Values.swift.authurl }}
