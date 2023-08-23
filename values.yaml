@@ -102,6 +102,13 @@ secrets:
 #  rootdirectory: /object/prefix
 #  encrypt: false
 #  secure: true
+#  chunksize: 5242880
+#  multipartcopychunksize: 33554432
+#  multipartcopymaxconcurrency: 100
+#  multipartcopythresholdsize: 33554432
+
+# redirect:
+#  disable: false 
 
 # Options for swift storage type:
 # swift:
