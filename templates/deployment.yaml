@@ -80,8 +80,8 @@ spec:
               port: 5000
           resources: {{ toYaml .Values.resources | nindent 12 }}
           env: {{ include "docker-registry.envs" . | nindent 12 }}
-          {{- if .Values.containerSecurityContext.enabled }}
-          securityContext: {{ omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+          {{- if .Values.containerSecurityContext }}
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
           {{- end }}
           volumeMounts: {{ include "docker-registry.volumeMounts" . | nindent 12 }}
       {{- if .Values.nodeSelector }}
