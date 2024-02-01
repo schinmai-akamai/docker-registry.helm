@@ -153,6 +153,7 @@ configData:
       threshold: 3
 
 securityContext:
+  enabled: true
   runAsUser: 1000
   fsGroup: 1000
 
