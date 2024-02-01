@@ -85,6 +85,8 @@ secrets:
 # Use a secretRef with keys (accessKey, secretKey) for secrets stored outside the chart
 #   s3:
 #     secretRef: ""
+#     secretKeyName: "" # defaults to s3SecretKey if not specified
+#     accessKeyName: "" # defaults to s3AccessKey if not specified
 #     accessKey: ""
 #     secretKey: ""
 # Secrets for Swift username and password
@@ -100,6 +102,10 @@ secrets:
 #  rootdirectory: /object/prefix
 #  encrypt: false
 #  secure: true
+#  chunksize: 5242880
+#  multipartcopychunksize: 33554432
+#  multipartcopymaxconcurrency: 100
+#  multipartcopythresholdsize: 33554432
 
 # Options for swift storage type:
 # swift:
@@ -154,7 +160,6 @@ configData:
 
 securityContext:
   runAsUser: 1000
-  fsGroup: 1000
 
 priorityClassName: ""
 
