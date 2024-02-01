@@ -38,7 +38,7 @@ spec:
           priorityClassName: "{{ .Values.priorityClassName }}"
           {{- end }}
           {{- if .Values.securityContext }}
-          securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+          securityContext: {{ omit .Values.securityContext "enabled" | toYaml | nindent 12 }}
           {{- end }}
           containers:
             - name: {{ .Chart.Name }}
