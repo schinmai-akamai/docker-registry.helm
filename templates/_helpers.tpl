@@ -75,12 +75,12 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
   valueFrom:
     secretKeyRef:
       name: {{ if .Values.secrets.s3.secretRef }}{{ .Values.secrets.s3.secretRef }}{{ else }}{{ template "docker-registry.fullname" . }}-secret{{ end }}
-      key: s3AccessKey
+      key: {{ if .Values.secrets.s3.accessKeyName }}{{ .Values.secrets.s3.accessKeyName }}{{ else }} s3AccessKey {{ end }}
 - name: REGISTRY_STORAGE_S3_SECRETKEY
   valueFrom:
     secretKeyRef:
       name: {{ if .Values.secrets.s3.secretRef }}{{ .Values.secrets.s3.secretRef }}{{ else }}{{ template "docker-registry.fullname" . }}-secret{{ end }}
-      key: s3SecretKey
+      key: {{ if .Values.secrets.s3.secretKeyName}}{{ .Values.secrets.s3.secretKeyName}}{{ else }} s3SecretKey {{ end }}
 {{- end -}}
 
 {{- if .Values.s3.regionEndpoint }}
@@ -101,6 +101,26 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- if .Values.s3.secure }}
 - name: REGISTRY_STORAGE_S3_SECURE
   value: {{ .Values.s3.secure | quote }}
+{{- end -}}
+
+{{- if .Values.s3.chunksize }}
+- name: REGISTRY_STORAGE_S3_CHUNKSIZE
+  value: {{ .Values.s3.chunksize | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopychunksize }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYCHUNKSIZE
+  value: {{ .Values.s3.multipartcopychunksize | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopymaxconcurrency }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYMAXCONCURRENCY
+  value: {{ .Values.s3.multipartcopymaxconcurrency | quote }}
+{{- end -}}
+
+{{- if .Values.s3.multipartcopythresholdsize }}
+- name: REGISTRY_STORAGE_S3_MULTIPARTCOPYTHRESHOLDSIZE
+  value: {{ .Values.s3.multipartcopythresholdsize | quote }}
 {{- end -}}
 
 {{- else if eq .Values.storage "swift" }}
